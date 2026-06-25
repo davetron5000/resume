@@ -6,19 +6,17 @@
     <title>Resume of David Copeland</title>
     <meta name="description" content="Resume of David Copeland">
     <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="styles.css">
     <meta property="og:title" content="Resume of David Copeland">
     <meta property="og:description" content="Experienced Hands-on Technical Leader Focused on Results and Outcomes">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://yourdomain.com/">
     <meta property="og:image" content="https://yourdomain.com/preview.png">
-    <link rel="stylesheet" href="https://unpkg.com/brut-css/dist/brut.css"/>
+    <link rel="stylesheet" href="brut.css">
     <style>
 
 @font-face {
   font-family: "Fraunces";
   src: url("fonts/Fraunces-VariableFont.ttf") format("truetype-variations");
-  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -26,7 +24,6 @@
 @font-face {
   font-family: "Fraunces";
   src: url("fonts/Fraunces-Italic-VariableFont.ttf") format("truetype-variations");
-  font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
@@ -34,15 +31,68 @@
 @font-face {
   font-family: "Inconsolata";
   src: url("fonts/Inconsolata-VariableFont.ttf") format("truetype-variations");
-  font-weight: 100 900;
   font-display: swap;
 }
 
 
 :root {
   /* Fraunces ideally, but falling back to the modernfontstacks.com "Antique" stack */
-  --ff-sans: Fraunces, Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; 
+  --ff-sans: Fraunces, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; 
   --ff-mono:  Inconsolata, 'Nimbus Mono PS', 'Courier New', monospace;
+
+  --background-color: #FEFEF9;
+  --color: #141303;
+  --link-color: var(--blue-400);
+  --link-hover-color: var(--blue-500);
+  --link-active-color: var(--red-400);
+  --link-alt-color: var(--orange-300);
+  --de-emphasized-color: var(--gray-400);
+  --de-de-emphasized-color: var(--gray-600);
+  --font-weight-bold: 900;
+  --font-weight-semibold: 700;
+  --font-weight-semibold-ish: 600;
+  --font-weight-light: 300;
+  --nav-border-color: var(--gray-600);
+  --link-color-muted: var(--gray-200);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: #FEFEF9;
+    --background-color: #141303;
+    --link-color: var(--blue-700);
+    --link-hover-color: var(--blue-600);
+    --link-active-color: var(--red-400);
+    --link-alt-color: var(--orange-700);
+    --de-emphasized-color: var(--gray-600);
+    --de-de-emphasized-color: var(--gray-400);
+    --font-weight-bold: 900;
+    --font-weight-semibold: 700;
+    --font-weight-semibold-ish: 600;
+    --font-weight-light: 300;
+    --nav-border-color: var(--gray-400);
+    --link-color-muted: var(--gray-700);
+  }
+}
+@media (prefers-contrast: more) {
+  :root {
+    --font-weight-light: 400;
+    --background-color: #FFFFFA;
+    --color: #101000;
+    --de-de-emphasized-color: var(--gray-500);
+  }
+}
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #101000;
+    --color: #FFFFFA;
+    --de-de-emphasized-color: var(--gray-500);
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 h1, h2, h3, h4, h5, h6, dl, dt, dd {
@@ -53,13 +103,13 @@ ul {
   padding: 0;
 }
 a, a:visited {
-  color: var(--blue-400);
+  color: var(--link-color);
 }
 a:hover {
-  color: var(--blue-500);
+  color: var(--link-hover-color);
 }
 a:active {
-  color: var(--red-400);
+  color: var(--link-active-color);
 }
 p {
   margin-top: var(--sp-3);
@@ -69,21 +119,89 @@ h2 {
   font-size: var(--fs-3);
   text-transform: uppercase;
   letter-spacing: var(--ls-tracked);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
+  &:before {
+    content: "§ ";
+    font-weight: var(--font-weight-light);
+    color: var(--de-emphasized-color);
+  }
 }
-#experience {
-  padding-top: var(--sp-3);
-  article {
-    padding-top: var(--sp-4);
-    margin-left: var(--sp-3);
-    header {
+header {
+  margin-top: var(--fs-3);
+  margin-bottom: var(--fs-3);
+  h1 {
+    font-size: var(--fs-6);
+    font-weight: var(--font-weight-semibold);
+  }
+  > p {
+    font-size: var(--fs-4);
+    font-style: italic;
+    font-weight: var(--font-weight-light);
+  }
+  address {
+    font-style: normal;
+    ul {
       display: flex;
       align-items: baseline;
-      gap: var(--sp-3);
+      flex-wrap: wrap;
+      list-style-type: none;
+      column-gap: var(--sp-3);
+      row-gap: var(--sp-1);
+    }
+    a {
+      font-family: var(--ff-mono);
+    }
+  }
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: baseline;
+    width: max-content;
+    gap: var(--sp-2);
+    border-left: solid 3px var(--nav-border-color);
+    border-right: solid 3px var(--nav-border-color);
+    border-radius: var(--bw-2);
+    padding: var(--sp-1);
+    li {
+      text-transform: uppercase;
+      letter-spacing: var(--ls-tracked);
+      font-size: var(--fs-0);
+      a {
+        color: var(--link-color-muted);
+      }
+    }
+  }
+}
+footer {
+  padding-top: var(--sp-8);
+}
+dbc-experience {
+  display: block;
+  padding-top: var(--sp-3);
+  nav {
+    max-width: var(--tw-wide);
+    ul { 
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: var(--sp-2);
+      row-gap: var(--sp-1);
+      li {
+        a {
+          font-size: var(--fs-1);
+          color: var(--link-alt-color);
+        }
+        a:visited {
+          color: var(--link-alt-color);
+        }
+      }
+    }
+  }
+  article {
+    padding-bottom: var(--sp-4);
+    margin-left: var(--sp-3);
+    header {
       dl {
-        display: flex;
-        align-items: baseline;
-        gap: var(--sp-3);
         dt { 
           position: absolute;
           left: -10000px;
@@ -93,7 +211,7 @@ h2 {
           overflow: hidden;
         }
         dd {
-          font-weight: 300;
+          font-weight: var(--font-weight-light);
           a {
             font-family: var(--ff-mono);
             font-weight: normal;
@@ -103,14 +221,16 @@ h2 {
 
       h3 {
         font-size: var(--fs-5);
-        font-weight: 600;
+        font-weight: var(--font-weight-semibold-ish);
+        margin-bottom: var(--sp-2);
+        line-height: var(--lh-solid);
       }
     }
     > ul {
       list-style-type: none;
       h4 {
         font-size: var(--fs-4);
-        font-weight: 900;
+        font-weight: var(--font-weight-bold);
         letter-spacing: calc(var(--ls-tracked) / 2);
         margin-top: var(--sp-4);
       }
@@ -121,7 +241,7 @@ h2 {
       }
       li > p:first-of-type {
         margin-top: 0;
-        color: var(--gray-400);
+        color: var(--de-emphasized-color);
         font-size: var(--fs-1);
       }
       li ul li summary, li ul li {
@@ -142,31 +262,68 @@ h2 {
       li ul details p {
         margin-left: var(--sp-3);
         font-size: var(--fs-1);
-        font-weight: 300;
+        font-weight: var(--font-weight-light);
       }
       li ul details summary {
         cursor: pointer;
       }
     }
+    &:after {
+      content: "❧";
+      display: block;
+      font-size: var(--fs-4);
+      color: var(--de-emphasized-color);
+    }
   }
 }
-#publications {
+@media screen and (min-width: 30em) {
+  dbc-experience {
+    article {
+      header {
+        display: flex;
+        align-items: baseline;
+        gap: var(--sp-3);
+        h3 {
+          margin-bottom: var(--sp-1);
+        }
+        dl {
+          display: flex;
+          align-items: baseline;
+          gap: var(--sp-3);
+        }
+      }
+    }
+  }
+}
+
+#books {
   padding-top: var(--sp-3);
   ul {
     list-style-type: none;
     padding-left: var(--sp-3);
     h3 {
+      padding-top: var(--sp-2);
       font-size: var(--fs-4);
       font-style: italic;
-      font-weight: 600;
+      font-weight: var(--font-weight-light);
+      color: var(--de-emphasized-color);
+      margin-bottom: var(--sp-1);
+      line-height: var(--lh-solid);
+    }
+    [role=none] {
+      display: none;
     }
     li > p {
       margin-top: 0;
-      color: var(--gray-400);
+      color: var(--de-emphasized-color);
       font-size: var(--fs-2);
       display: flex;
-      align-items: baseline;
+      flex-direction: column;
       gap: var(--sp-2);
+      line-height: 1;
+      time {
+        margin-bottom: var(--sp-1);
+      }
       a {
         font-family: var(--ff-mono);
         font-weight: normal;
@@ -174,14 +331,30 @@ h2 {
     }
   }
 }
+
+@media screen and (min-width: 30em) {
+  #books {
+    ul {
+      [role=none] {
+        display: inline;
+      }
+      li > p {
+        flex-direction: row;
+      }
+    }
+  }
+}
+
 #skills {
   padding-top: var(--sp-3);
   h3 {
     font-size: var(--fs-4);
     font-style: italic;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold-ish);
     margin-left: var(--sp-3);
     margin-top: var(--sp-3);
+    margin-bottom: var(--sp-1);
+    line-height: var(--lh-solid);
   }
 
   ul {
@@ -190,24 +363,57 @@ h2 {
   }
   ul:first-of-type {
     columns: 2;
-    column-gap: var(--sp-6);
+    column-gap: var(--sp-4);
     font-size: var(--fs-2);
     li {
-      line-height: 1.4;
+      line-height: 1.2;
+      margin-bottom: var(--sp-3);
     }
   }
   ul:last-of-type {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-3);
+    column-gap: var(--sp-3);
+    row-gap: var(--sp-2);
+    max-width: var(--tw-wide);
     li {
       font-family: var(--ff-mono);
-      border: solid thin;
+      font-size: var(--fs-1);
+      border: solid thin var(--de-emphasized-color);
       border-radius: var(--bw-2);
       padding-left: var(--sp-2);
       padding-right: var(--sp-2);
       padding-top: var(--sp-1);
       padding-bottom: var(--sp-1);
+      &[is-strong] {
+        border-width: var(--bw-1);
+        font-weight: var(--font-weight-semibold);
+      }
+      &[is-old] {
+        border-color: var(--de-de-emphasized-color);
+        font-weight: var(--font-weight-light);
+      }
+      &:last-of-type {
+        font-family: var(--ff-sans);
+        border: none;
+        font-style: italic;
+        flex-basis: 100%;
+        padding-top: 0;
+          &:before {
+            content: "☞ ";
+            font-size: var(--fs-2);
+          }
+      }
+    }
+  }
+}
+@media screen and (min-width: 30em) {
+  #skills {
+    ul:first-of-type {
+      column-gap: var(--sp-6);
+      li {
+        margin-bottom: var(--sp-2);
+      }
     }
   }
 }
@@ -216,8 +422,9 @@ h2 {
   h3 {
     font-size: var(--fs-4);
     font-style: italic;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold-ish);
     margin-top: var(--sp-3);
+    line-height: var(--lh-solid);
   }
 
   ul {
@@ -225,26 +432,95 @@ h2 {
     li {
       margin-left: var(--sp-3);
       > p:first-of-type {
-        font-size: var(--fs-3);
+        font-size: var(--fs-2);
         margin: 0;
+        margin-top: var(--sp-1);
       }
       > p:last-of-type {
         margin-top: 0;
-        color: var(--gray-400);
+        color: var(--de-emphasized-color);
         font-size: var(--fs-1);
       }
     }
   }
 }
+
+@media print {
+  :root {
+    --link-color: var(--gray-200);
+    --link-alt-color: var(--gray-200);
+    --fs-0:0.575rem;
+    --fs-1:0.675rem;
+    --fs-2:0.875rem;
+    --fs-3:1rem;
+    --fs-4:1.25rem;
+    --fs-5:1.5rem;
+    --fs-6:2.25rem;
+    --fs-7:3rem;
+    --fs-8:4.25rem;
+    --fs-9:5rem;
+    --sp-1:0.125rem;
+    --sp-2:0.25rem;
+    --sp-3:0.5rem;
+    --sp-4:1rem;
+    --sp-5:2rem;
+    --sp-6:4rem;
+    --sp-7:8rem;
+    --sp-8:12rem;
+    --tw:60ch;
+    --tw-wide:75ch;
+    --tw-narrow:50ch;
+    --lh-solid:1;
+    --lh-title:1.25;
+    --lh-copy:1.5
+  }
+  nav {
+    display: none;
+  }
+  dbc-experience {
+    article header, article > ul li {
+      break-inside: avoid;
+    }
+    article {
+      header {
+        h3 {
+          font-size: var(--fs-6);
+          margin-bottom: var(--sp-4);
+        }
+      }
+      > ul > li {
+        margin-left: var(--sp-5);
+      }
+      &:after {
+        display: none;
+      }
+    }
+  }
+  #skills {
+    break-inside: avoid;
+    h3 {
+      font-size: var(--fs-3);
+    }
+  }
+  #books, #education {
+    > ul li {
+      break-inside: avoid;
+    }
+  }
+}
+@page {
+  size: letter;
+  margin: 0.25in;
+}
     </style>
   </head>
   <body class="ff-sans mh-auto w-90 w-70-ns">
-    <header class="mv-3">
-      <h1 class="f-6 fw-7">David Copeland</h1>
-      <p class="f-4 i fw-3">Experienced Hands-on Technical Leader</p>
+    <header>
+      <h1>David Bryant Copeland</h1>
+      <p>Experienced Hands-on Technical Leader</p>
 
       <address>
-        <ul class="flex items-baseline flex-wrap lst-none gap-3">
+        <ul>
           <li>Washington, DC</li>
           <li role="none">•</li>
           <li><a href="mailto:davec@naildrivin5.com">davec@naildrivin5.com</a></li>
@@ -254,12 +530,21 @@ h2 {
           <li><a href="https://github.com/davetron5000">github.com/davetron5000</a></li>
         </ul>
       </address>
+      <nav>
+        <ul>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#books">Books</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-      <section id="experience">
+      <dbc-experience id="experience">
         <h2>Experience</h2>
+        <nav id="jobs"></nav>
 
-        <article>
+        <article id="experience-Mood" >
           <header>
             <h3>Mood Health</h3>
             <dl>
@@ -336,7 +621,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-ThirdTank" >
           <header>
             <h3>Third Tank, LLC (Self)</h3>
             <dl>
@@ -375,7 +660,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-StitchFix" >
           <header>
             <h3>Stitch Fix</h3>
             <dl>
@@ -510,7 +795,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-LivingSocial" >
           <header>
             <h3>LivingSocial</h3>
             <dl>
@@ -532,7 +817,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-OPOWER" >
           <header>
             <h3>OPOWER</h3>
             <dl>
@@ -579,7 +864,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-Gliffy" >
           <header>
             <h3>Gliffy</h3>
             <dl>
@@ -604,7 +889,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-PAC" >
           <header>
             <h3>Provident Analysis Corporation</h3>
             <dl>
@@ -637,7 +922,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-NOVO" >
           <header>
             <h3>Semaphore Partners / NOVO / Publicis</h3>
             <dl>
@@ -659,7 +944,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-Evergreen" >
           <header>
             <h3>Evergreen Internet</h3>
             <dl>
@@ -679,7 +964,7 @@ h2 {
             </li>
           </ul>
         </article>
-        <article>
+        <article id="experience-RRI" >
           <header>
             <h3>Recognition Research</h3>
             <dl>
@@ -702,8 +987,8 @@ h2 {
           </ul>
         </article>
       </section>
-      <section id="publications">
-        <h2>Publications</h2>
+      <section id="books">
+        <h2>Books</h2>
         <ul>
           <li>
             <h3>Sustainable Dev Environments with Docker and Bash</h3>
@@ -786,41 +1071,50 @@ h2 {
         <h3>Strategic</h3>
         <ul>
           <li>Agile Retrospectives</li>
+          <li>Career Management</li>
+          <li>Cybersecurity</li>
+          <li>Documentation</li>
+          <li>GDPR</li>
+          <li>HIPAA</li>
           <li>Leading through Influence</li>
           <li>Organization Design</li>
-          <li>Performance Reviews and Career Management</li>
           <li>Process Design</li>
           <li>Product Management</li>
           <li>Roadmap Planning</li>
+          <li>SOX</li>
           <li>Team Management</li>
         </ul>
         <h3>Tactical</h3>
         <ul>
           <li>AWS</li> 
           <li>Bash</li> 
-          <li>CSS</li> 
+          <li is-strong>CSS</li> 
           <li>Docker</li> 
-          <li>Heroku</li> 
-          <li>HTML</li> 
-          <li>HTTP</li> 
-          <li>JavaScript</li> 
+          <li is-strong>Heroku</li> 
+          <li is-strong>HTML</li> 
+          <li is-strong>HTTP</li> 
+          <li>Git</li> 
+          <li>GitHub</li> 
+          <li is-old>Java</li> 
+          <li is-strong>JavaScript</li> 
+          <li is-old>JEE</li> 
           <li>LaTeX</li> 
+          <li is-strong>Markdown</li> 
           <li>Microservices</li> 
-          <li>Postgres</li> 
+          <li is-old>Perl</li> 
+          <li is-strong>Postgres</li> 
           <li>RabbitMQ</li> 
-          <li>Rails</li> 
+          <li is-strong>Rails</li> 
           <li>Redis/ValKey</li> 
           <li>Resque</li> 
-          <li>REST</li> 
-          <li>Ruby</li> 
-          <li>Sidekiq</li> 
-          <li>SQL</li> 
+          <li is-strong>REST</li> 
+          <li is-strong>Ruby</li> 
+          <li is-strong>Sidekiq</li> 
+          <li is-old>Spring</li> 
+          <li is-strong>SQL</li> 
+          <li is-old>Swing</li> 
+          <li is-strong>Technical Writing</li> 
           <li>Web Components</li> 
-          <li>Java (less recent)</li> 
-          <li>JEE (less recent)</li> 
-          <li>Perl (less recent)</li> 
-          <li>Spring (less recent)</li> 
-          <li>Swing (less recent)</li> 
           <li>Probably more - I've been doing this for 30 years</li>
         </ul>
       </section>
@@ -854,6 +1148,70 @@ h2 {
       </section>
 
     </main>
+    <footer>
+    </footer>
   </body>
+  <script>
+    class ExperienceElement extends HTMLElement {
+      connectedCallback() {
+        const nav = document.getElementById("jobs")
+        if (!nav) {
+          console.warn("No <nav> - nowhere to insert anything!")
+          return;
+        }
+
+        nav.innerHTML = ""
+        nav.setAttribute("aria-label", "Experience")
+
+        const list = document.createElement("ul")
+        this.#jobs.forEach( ({id,title}, index, array) => {
+
+          if (index != 0) {
+            list.appendChild(this.#dot())
+          }
+
+          list.appendChild(this.#navLink(id,title))
+
+        })
+
+        nav.appendChild(list)
+      }
+
+      get #jobs() {
+        const jobs = []
+        this.querySelectorAll("article").forEach( (article) => {
+          const h3 = article.querySelector("h3")
+          if (h3 && article.id) {
+            jobs.push({
+              id: article.id,
+              title: h3.textContent,
+            })
+          }
+          else {
+            console.warn("<article> without id or h3 found - can't use it: %o", article)
+          }
+        })
+        return jobs
+      }
+
+      #dot() {
+        const dot = document.createElement("li")
+        dot.setAttribute("role", "none")
+        dot.textContent = "•"
+        return dot;
+      }
+      #navLink(id,title) {
+        const li = document.createElement("li")
+        const a = document.createElement("a")
+        a.href = `#${id}`
+        a.textContent = title
+        li.appendChild(a)
+        return li
+      }
+    }
+
+    customElements.define("dbc-experience", ExperienceElement)
+
+  </script>
 </html>
 
